@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Facilities{% endblock %}
+{% static "images" as baseUrl %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/facilities.css'%}">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+<link
+  href="https://fonts.googleapis.com/css2?family=Merienda:wght@400;700&family=Open+Sans:wght@300&family=Poppins:wght@400;500;600&display=swap"
+  rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+{% endblock %}
+
+{% block content %}
+<!--FACILITIES-->
+<div class="my-5 px-4">
+  <h2 class="fw-bold h-font text-center">Facilities</h2>
+  <div class="h-line bg-dark"></div>
+  <p class="text-center mt-3 text-dark">
+    Indulge in luxurious comfort at our hotel, where meticulously appointed rooms, state-of-the-art amenities, and personalized service converge to create an unforgettable stay. Whether you're unwinding by the pool, savoring exquisite cuisine in our restaurants, or hosting events in our sophisticated venues, our facilities are designed to exceed your every expectation.
+  </p>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4 col-md-6 mb-5 px-4">
+      <div class="bg-white rounded shadow p-4 border-top border-4 border-dark pop">
+        <div class="d-flex align-items-center mb-2">
+          <img src="{% static 'images/facilities/wifi.svg' %}" width="40px">
+          <h5 class="m-0 ms-3">Wifi</h5>
+        </div>
+        <p>Stay seamlessly connected with our high-speed WiFi, allowing you to effortlessly stay in touch, work, or stream content throughout your stay.</p>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6 mb-5 px-4">
+      <div class="bg-white rounded shadow p-4 border-top border-4 border-dark pop">
+        <div class="d-flex align-items-center mb-2">
+          <img src="{% static 'images/facilities/ac.svg' %}" width="40px">
+          <h5 class="m-0 ms-3">AC</h5>
+        </div>
+        <p>Immerse yourself in ultimate comfort with individually controlled air conditioning, ensuring the perfect ambient temperature for a restful stay.</p>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6 mb-5 px-4">
+      <div class="bg-white rounded shadow p-4 border-top border-4 border-dark pop">
+        <div class="d-flex align-items-center mb-2">
+          <img src="{% static 'images/facilities/fire_safety.svg' %}" width="40px">
+          <h5 class="m-0 ms-3">Fire safety</h5>
+        </div>
+        <p>Your safety is our top priority. Benefit from state-of-the-art fire safety systems and protocols in place to ensure a secure environment throughout your visit.</p>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6 mb-5 px-4">
+      <div class="bg-white rounded shadow p-4 border-top border-4 border-dark pop">
+        <div class="d-flex align-items-center mb-2">
+          <img src="{% static 'images/facilities/heater.svg' %}" width="40px">
+          <h5 class="m-0 ms-3">Heater</h5>
+        </div>
+        <p>Tailor your room to your preferences with individual heaters, ensuring warmth and coziness for a delightful and personalized experience.</p>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6 mb-5 px-4">
+      <div class="bg-white rounded shadow p-4 border-top border-4 border-dark pop">
+        <div class="d-flex align-items-center mb-2">
+          <img src="{% static 'images/facilities/massage.svg' %}" width="40px">
+          <h5 class="m-0 ms-3">Spa</h5>
+        </div>
+        <p>Unwind and rejuvenate with our on-site massage services, offering a tranquil escape to pamper yourself during your stay.</p>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6 mb-5 px-4">
+      <div class="bg-white rounded shadow p-4 border-top border-4 border-dark pop">
+        <div class="d-flex align-items-center mb-2">
+          <img src="{% static 'images/facilities/tv.svg' %}" width="40px">
+          <h5 class="m-0 ms-3">TV</h5>
+        </div>
+        <p>Enjoy a variety of entertainment options with our in-room TV, providing access to a range of channels for your relaxation and enjoyment.</p>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6 mb-5 px-4">
+      <div class="bg-white rounded shadow p-4 border-top border-4 border-dark pop">
+        <div class="d-flex align-items-center mb-2">
+          <img src="{% static 'images/facilities/massage.svg' %}" width="40px">
+          <h5 class="m-0 ms-3">Gym</h5>
+        </div>
+        <p>Use a variety of machines and equipment for your fitness, all of which are state-of-the-art and have the best safety standards.</p>
+      </div>
+    </div>  
+    <div class="col-lg-4 col-md-6 mb-5 px-4">
+      <div class="bg-white rounded shadow p-4 border-top border-4 border-dark pop">
+        <div class="d-flex align-items-center mb-2">
+          <img src="{% static 'images/facilities/tv.svg' %}" width="40px">
+          <h5 class="m-0 ms-3">Arcade Room</h5>
+        </div>
+        <p>Enjoy a variety of entertainment options with our Arcade room, providing access to a range of digital and physical games for your entertainment and thrill.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

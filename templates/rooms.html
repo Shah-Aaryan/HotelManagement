@@ -1,0 +1,258 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Rooms{% endblock %}
+{% static "images" as baseUrl %}
+<!-- images is present in static folder &&  baseUrl act as variable -->
+{% block head %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+<link
+    href="https://fonts.googleapis.com/css2?family=Merienda:wght@400;700&family=Open+Sans:wght@300&family=Poppins:wght@400;500;600&display=swap"
+    rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<link rel="stylesheet" href="{% static 'css/rooms.css'%}">
+
+{% endblock %}
+
+{% block content %}
+<!--Rooms-->
+
+<div class="modal fade" id="registerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <form action="">
+      <div class="modal-header">
+        <h5 class="modal-title d-flex align-items-center">
+          <i class="bi bi-person-lines-fill fs-3 me-2"></i>Booking
+        </h5>
+        <button type="reset" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <input type="text" name="daterange" value="11/20/2023 - 11/26/2023" />
+        </div>
+        <div class="text-center my-1">
+          <button type="submit" class="btn btn-dark shadow-none">Book</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+
+<div class="my-5 px-4">
+    <h2 class="fw-bold h-font text-center">Rooms</h2>
+    <div class="h-line bg-dark"></div>
+    
+</div>
+<div class="container">
+    <div class="row"> 
+        <div class="d-flex justify-content-end">
+            <form action="{% url 'rooms' %}" method="get">
+                <div class="input-group mb-3" style="max-width: 210px;">
+                    <input type="text" class="form-control" name="location" placeholder="{% if location_query %}{{ location_query }}{% else %}Search{% endif %}" aria-label="Search" aria-describedby="search-button" value="{{ location_query }}">
+                    <button class="btn btn-primary custom-bg" type="submit" id="search-button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+        
+        <div class="col-lg-3 col-md-12 mb-lg-0 mb-4 px-lg-0">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white rounded shadow">
+                <div class="container-fluid flex-lg-column align-items-stretch">
+                    <h4 class="mt-2">Filter</h4>
+                    <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#filterDropdown" aria-controls="filterDropdown" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse flex-column align-items-stretch mt-2" id="filterDropdown">
+                    <form action="" method="POST">
+                    {% csrf_token %}
+                        <div class="border bg-light p-3 rounded mb-3">
+                            <h5 class="mb-3" style="font-size: 18px;">Check Availability</h5>
+                            <label class="form-label">Check-in</label>
+                            <input type="date" name="checkindate" class="form-control shadow-none mb-3">
+                            <label class="form-label">Check-out</label>
+                            <input type="date" name="checkoutdate" class="form-control shadow-none">
+                        </div>
+                        <div class="border bg-light p-3 rounded mb-3">
+                            <h5 class="mb-3" style="font-size: 18px;">Facilities</h5>
+                            <div class="m-3">
+                                <div class="mb-2">
+                                <input type="checkbox" id="f1" name="roomheater" class="form-check-input shadow-none me-2" {% if roomheater %}checked{% endif %}>
+                                <label class="form-check-label" for="f1">Room Heater</label>
+                            </div>
+                            <div class="mb-2">
+                                <input type="checkbox" id="f2" name="ac" class="form-check-input shadow-none me-2" {% if ac %}checked{% endif %}>
+                                <label class="form-check-label" for="f2">AC</label>
+                            </div>
+                            <div class="mb-2">
+                                <input type="checkbox" id="fs-3" name="wifi" class="form-check-input shadow-none me-2" {% if wifi %}checked{% endif %}>
+                                <label class="form-check-label" for="fs-3">Wifi</label>
+                            </div>
+                            <div class="mb-2">
+                                <input type="checkbox" id="fs-3" name="tv"  class="form-check-input shadow-none me-2" {% if tv %}checked{% endif %}>
+                                <label class="form-check-label" for="fs-3">TV</label>
+                            </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary custom-bg w-100"
+                            style="margin-left: 1px; margin-bottom: 5px; border-radius:5px;" data-bs-toggle="modal"
+                            data-bs-target="#addModal">
+                            Apply
+                        </button>
+                    </form>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+
+        <div class="col-lg-9 col-md-12 px-4">
+            {% for room in room_page %}
+            <div class="card mb-4 border-0 shadow">
+                <div class="row g-0 p-3 align-items-center">
+                    {% for image in room.images.all %}
+                        {% if forloop.counter == 1 %}
+                        <div class="col-md-5 mb-lg-0 mb-md-0 mb-3">
+                            <img src="{{image.image_url.url}}" class="img-fluid rounded" alt="{{ booking.room.name }}">
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                    <div class="col-md-5 px-lg-3 px-md-3 px-0">
+                        <h5 class="mb-3">{{ room.name }}</h5>
+                        <div class="features mb-3">
+                            <h6 class="mb-1">Features</h6>
+                            <span class="badge text-bg-light text-dark text-wrap">Rooms: {{ room.rooms }}</span>
+                            <span class="badge text-bg-light text-dark text-wrap">Bathrooms: {{ room.bathrooms }}</span>
+                            <span class="badge text-bg-light text-dark text-wrap">Balcony: {{ room.balcony }}</span>
+                            <span class="badge text-bg-light text-dark text-wrap">Sofas: {{ room.sofa }}</span>
+                        </div>
+                        <div class="facilities mb-4">
+                            <h6 class="mb-1">Facilities</h6>
+                            {% if room.room_heater %}
+                                <span class="badge text-bg-light text-dark text-wrap">Room Heater</span>
+                            {% endif %}
+                            {% if room.ac %}
+                                <span class="badge text-bg-light text-dark text-wrap">AC</span>
+                            {% endif %}
+                            {% if room.wifi %}
+                                <span class="badge text-bg-light text-dark text-wrap">Wifi</span>
+                            {% endif %}
+                            {% if room.tv %}
+                                <span class="badge text-bg-light text-dark text-wrap">TV</span>
+                            {% endif %}
+                        </div>
+                        <div class="guests">
+                            <h6 class="mb-1">Guests</h6>
+                            <span class="badge text-bg-light text-dark text-wrap">Adults: {{ room.adults }}</span>
+                            <span class="badge text-bg-light text-dark text-wrap">Children: {{ room.children }}</span>
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-2 mt-lg-0 mt-md-0 mt-4 text-center">
+                        <h6 class="mb-4">₹{{ room.price_per_night }} per night</h6>
+                        <!-- Add your "Book Now" button and modal here -->
+                        <button type="button" class="btn btn-primary custom-bg w-100" style="margin-left: 1px; margin-bottom: 5px; border-radius: 5px;" data-bs-toggle="modal"
+                            data-bs-target="#registerModal">
+                            Book Now
+                        </button>
+                        <a href="{% url 'room_detail' room.pk %}" class="btn btn-primary custom-bg w-100 mt-3">
+                            More Details
+                        </a>
+                    </div>
+                </div>
+                
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="row">
+            <div class="col text-center">
+                <ul class="pagination">
+                    {% if room_page.has_previous %}
+                        <li class="page-item">
+                            <a href="?page={{ room_page.previous_page_number }}" class="page-link" aria-label="Previous">
+                                <span aria-hidden="true">&lt; Page {{ room_page.previous_page_number }}</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                    
+                    {% if room_page.has_next %}
+                        <li class="page-item">
+                            <a href="?page={{ room_page.next_page_number }}" class="page-link" aria-label="Next">
+                                <span aria-hidden="true">Page {{ room_page.next_page_number }} &gt;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+            </div>
+
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script>
+$(function() {
+  $('input[name="daterange"]').daterangepicker({
+    opens: 'left'
+  }, function(start, end, label) {
+    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+  });
+});
+</script>
+<!-- Swiper JS -->
+        <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+        <!-- Initialize Swiper -->
+        <script>
+            var swiper = new Swiper(".mySwiper", {
+                loop: true,
+                spaceBetween: 40,
+
+                pagination: {
+                    el: ".swiper-pagination",
+                },
+                breakpoints: {
+                    320: {
+                        slidesPerView: 1,
+                    },
+                    640: {
+                        slidesPerView: 1,
+                    },
+                    768: {
+                        slidesPerView: 2,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                    }
+                }
+            });
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+    <script>
+        const searchButton = document.getElementById("search-button");
+    
+        searchButton.addEventListener("click", function() {
+            // Change the button color to green
+            searchButton.classList.remove("btn-primary");
+            searchButton.classList.add("btn-success");
+        });
+    </script>
+{% endblock %}
+

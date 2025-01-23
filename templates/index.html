@@ -1,0 +1,267 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+{% static "images" as baseUrl %}
+<!-- images is present in static folder &&  baseUrl act as variable -->
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/index.css'%}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.carousel.min.css" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+
+  <!-- Carousel -->
+  <div class="container-fluid px-lg-4 mt-4">
+    <div class="swiper swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="{% static 'images/carousel/1.png'  %}" >
+        </div>
+        <div class="swiper-slide">
+          <img src="{% static 'images/carousel/2.png'  %}">
+        </div>
+        <div class="swiper-slide">
+          <img src="{% static 'images/carousel/3.png'  %}">
+        </div>
+        <div class="swiper-slide">
+          <img src="{% static 'images/carousel/4.png'  %}">
+        </div>
+        <div class="swiper-slide">
+          <img src="{% static 'images/carousel/5.png'  %}">
+        </div>
+        <div class="swiper-slide">
+          <img src="{% static 'images/carousel/6.png'  %}">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Check Availability form-->
+  <div class="container availability-form">
+    <div class="row">
+      <div class="col-lg-12 bg-white shadow p-4 rounded">
+        <h5 class="mb-4">Check Booking Availability</h5>
+        <form>
+          <div class="row align-items-end">
+            <div class="col-lg-3 mb-3">
+              <label class="form-label" style="font-weight:500">Check-in</label>
+              <input type="date" class="form-control shadow-none">
+            </div>
+            <div class="col-lg-3 mb-3">
+              <label class="form-label" style="font-weight:500">Check-out</label>
+              <input type="date" class="form-control shadow-none">
+            </div>
+            <div class="col-lg-3 mb-3">
+              <label class="form-label" style="font-weight:500">Adult</label>
+              <select class="form-select shadow-none">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="3">4</option>
+              </select>
+            </div>
+            <div class="col-lg-2 mb-3">
+              <label class="form-label" style="font-weight:500">Children</label>
+              <select class="form-select shadow-none">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="3">4</option>
+              </select>
+            </div>
+            <div class="col-lg-1  mb-lg-3 mt-2">
+              <button type="submit" class="btn text-white shadow-none custom-bg">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Our Rooms-->
+  <h3 class="my-5 fw-bold h-font text-center">Locations</h3>
+  <div class="container px-4">
+    <!-- Swiper -->
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper mb-5">
+        {% for loc in locs %}
+        <div class="swiper-slide bg-white text-center overflow-hidden rounded">
+          <a href="rooms" class="text-dark text-decoration-none">
+            <!-- <img src="{% static 'images/location_1.jpg' %}" alt="" width="w-10" height="250px">   -->
+            <!-- static command -->
+            <!-- <img src="{{baseUrl}}/{loc.img}" alt="">  -->
+            <img src="{{loc.img.url}}" width="w-10" height="250px">
+            <h5 class="mg-2">{{loc.name}}</h5>
+            <div class="location_subtitle">
+              <p>{{loc.desc}}</p>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+    </div>
+  <!--Our Facilities-->
+    <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">Our Facilities</h2>
+    <div class="container">
+      <div class="row justify-content-evenly px-lg-0 px-md-0 px-5">
+        <div class="col-lg-2 col-md-2 text-center bg-white py-4  my-3">
+          <img src="{% static 'images/facilities/wifi.svg' %}" width="80px">
+          <h5 class>Wifi</h5>
+        </div>
+        <div class="col-lg-2 col-md-2 text-center bg-white py-4  my-3">
+          <img src="{% static 'images/facilities/fire_safety.svg' %}" width="80px">
+          <h5 class>Fire Safety</h5>
+        </div>
+        <div class="col-lg-2 col-md-2 text-center bg-white py-4  my-3">
+          <img src="{% static 'images/facilities/tv.svg' %}" width="80px">
+          <h5 class>Television</h5>
+        </div>
+        <div class="col-lg-2 col-md-2 text-center bg-white py-4  my-3">
+          <img src="{% static 'images/facilities/massage.svg' %}" width="80px">
+          <h5 class>Massage</h5>
+        </div>
+        <div class="col-lg-2 col-md-2 text-center bg-white py-4  my-3">
+          <img src="{% static 'images/facilities/heater.svg' %}" width="80px">
+          <h5 class>Heater</h5>
+        </div>
+        <div class="col-lg-2 col-md-2 text-center bg-white py-4  my-3">
+          <img src="{% static 'images/facilities/ac.svg' %}" width="80px">
+          <h5 class>AC</h5>
+        </div>
+      </div>
+    </div>
+
+  <!--Our Services-->
+  <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">Our Services</h2>
+  <div class="container">
+    <div class="row justify-content-evenly px-lg-0 px-md-0 px-5">
+      <div class="col-lg-2 col-md-2 text-center bg-white py-4 my-3">
+        <img src="{% static 'images/services/room-service.png ' %}" width="80px">
+        <h5 class>Room Service</h5>
+      </div>
+      <div class="col-lg-2 col-md-2 text-center bg-white py-4  my-3">
+        <img src="{% static 'images/services/laundry.png ' %}" width="80px">
+        <h5 class>Laundry</h5>
+      </div>
+      <div class="col-lg-2 col-md-2 text-center bg-white py-4  my-3">
+        <img src="{% static 'images/services/restaurant.png ' %}" width="80px">
+        <h5 class>Restaurant</h5>
+      </div>
+      <div class="col-lg-2 col-md-2 text-center bg-white py-4  my-3">
+        <img src="{% static 'images/services/car.png ' %}" width="80px">
+        <h5 class>Pick Up & Drop</h5>
+      </div>
+      <div class="col-lg-2 col-md-2 text-center bg-white py-4  my-3">
+        <img src="{% static 'images/services/parking.png ' %}" width="80px">
+        <h5 class>Parking</h5>
+      </div>
+      <div class="col-lg-2 col-md-2 text-center bg-white py-4  my-3">
+        <img src="{% static 'images/services/reception.png ' %}" width="80px">
+        <h5 class>24hr Reception</h5>
+      </div>
+      >
+    </div>
+
+  </div>
+
+<!-- Our Testimonals -->
+	<section class="testimonial">
+		<div class="container">
+			<div class="row">
+				<!-- <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+					<div class="sec-heading text-center">
+						<h6>Our Testimonials</h6>
+					</div>
+				</div> -->
+        <h2 class="pt-4 mb-4 text-center fw-bold h-font">Our Testimonals</h2>
+			</div>
+			<div class="row">
+				<div class="clients-carousel owl-carousel">
+					<div class="single-box">
+						<div class="img-area"><img alt="" class="img-fluid" src="https://images.pexels.com/photos/3525908/pexels-photo-3525908.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"></div>
+						<div class="content">
+							<p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, doloribus minima praesentium laborum ea earum."</p>
+							<h4>Jason Doe</h4>
+							<h6>Designation Here</h6>
+						</div>
+					</div>
+					<div class="single-box">
+						<div class="img-area"><img alt="" class="img-fluid" src="https://images.pexels.com/photos/5042302/pexels-photo-5042302.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"></div>
+						<div class="content">
+							<p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, doloribus minima praesentium laborum ea earum."</p>
+							<h4>Dave Wood</h4>
+							<h6>Designation Here</h6>
+						</div>
+					</div>
+					<div class="single-box">
+						<div class="img-area"><img alt="" class="img-fluid" src="https://images.pexels.com/photos/3211476/pexels-photo-3211476.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"></div>
+						<div class="content">
+							<p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, doloribus minima praesentium laborum ea earum."</p>
+							<h4>Matt Demon</h4>
+							<h6>Designation Here</h6>
+						</div>
+					</div>
+					<div class="single-box">
+						<div class="img-area"><img alt="" class="img-fluid" src="https://images.pexels.com/photos/1270076/pexels-photo-1270076.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"></div>
+						<div class="content">
+							<span class="rating-star"><i class="icofont-star"></i><i class="icofont-star"></i><i class="icofont-star"></i><i class="icofont-star"></i><i class="icofont-star"></i></span>
+							<p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, doloribus minima praesentium laborum ea earum."</p>
+							<h4>jimmy kimmel</h4>
+							<h6>Designation Here</h6>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+	</script> 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.min.js">
+	</script> 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js">
+	</script> 
+	<script>
+	       $('.clients-carousel').owlCarousel({
+	           loop: true,
+	           nav: false,
+	           autoplay: false,
+	           autoplayTimeout: 5000,
+	           animateOut: 'fadeOut',
+	           animateIn: 'fadeIn',
+	           smartSpeed: 450,
+	           margin: 30,
+	           responsive: {
+	               0: {
+	                   items: 1
+	               },
+	               768: {
+	                   items: 2
+	               },
+	               991: {
+	                   items: 3
+	               },
+	               1200: {
+	                   items: 3
+	               },
+	               1920: {
+	                   items: 4
+	               }
+	           }
+	       });
+	</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+<script src="{% static 'js/script.js' %}"></script>
+
+
+
+{% endblock %}
